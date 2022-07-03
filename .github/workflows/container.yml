@@ -19,3 +19,9 @@ jobs:
         with:
           entrypoint: '/usr/local/bin/node'
           args: '-v'
+      - uses: actions/checkout@v1
+      - name: Run a script
+        uses: docker://node:16-bullseye
+        with:
+          entrypoint: './myscript.sh'
+          args: "Some string of some sort"
