@@ -2,12 +2,20 @@ name: Container
 on: push
 
 jobs:
-  node-docker:
+  docker-steps:
     runs-on: ubuntu-latest
     container:
-      image: node:14-alpine3.15
+      image: node:16-stretch
     steps:
       - name: Log node version
-        run: |
-          node -v
-          cat /etc/os-release
+        run: node -v
+      - name: Step with docker
+        uses: docker://node:16-bullseye
+        with:
+          entrypoint: '/bin/echo'
+          args: 'Hello Beef'
+      - name: Step with docker
+        uses: docker://node:16-bullseye
+        with:
+          entrypoint: '/usr/local/bin/node'
+          args: '-v'
